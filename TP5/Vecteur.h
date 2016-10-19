@@ -5,12 +5,28 @@
 #ifndef TP5_VECTEUR_H
 #define TP5_VECTEUR_H
 
+#include <iostream>
 
-template<class T, class sz>class Vecteur {
-    int T;
-    int sz = 6;
-    sz vc[];
+using namespace std;
+
+template<class T = int, int sz = 6>class Vecteur {
+private:
+    const T* vc[sz];
+
+public:
+    Vecteur();
+    void put(int i, const T* p) throw (int);
+    const T* operator []  (const int indice) const throw (int);
 };
 
+template<class T,int sz>
+const T* Vecteur<T, sz>::operator []  (const int indice) const throw (int) {
+    if (indice < 0 || indice >= sz) {
+        throw 1;
+    }
 
+    return vc[indice];
+};
+
+#include "Vecteur.inl"
 #endif //TP5_VECTEUR_H
